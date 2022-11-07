@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: deepskyblue;
+    font-family: Verdana;
+}
+#gameBoard{
+    width: 330px;
+    height: 330px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    margin: auto;
+}
+.field{
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    color: deepskyblue;
+    border: 0;
+    border-radius: 2vh;
+    margin: 5px;
+    font-weight: bolder;
+}
+#start{
+    margin: auto;
+    width: 300px;
+    height: 50px;
+    display: block;
+}
+#playerName{
+    width: 330px;
+    height: 100px;
+    border-radius: 2vh;
+    text-align: center;
+    display: block;
+    margin: auto;
+    background-color: white;
+    color: deepskyblue;
+    font-size: 20px;
+    line-height: 100px;
+    margin-bottom: 5px;
+}
