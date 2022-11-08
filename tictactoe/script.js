@@ -1,10 +1,8 @@
 let playerName = document.querySelector("#playerName");
 let moves = 0;
 let won;
-
-//Table of fields
+let gameActive = true;
 const fields = ["","","","","","","","",""];
-//Declare which player is first
 let activePlayer = "X";
 const WinCombinations = [
     //Vertical Win
@@ -20,9 +18,9 @@ const WinCombinations = [
     [6, 4, 2]
 ];
 
-//ZMIANA NA FUNCKJE STRZALKOWA
-let checkForWin = () =>{
+const checkForWin = () =>{
 
+    // OLD NOT OPTIMIZED CODE
     // for(let i = 0; i <=7; i++){
     //     const [number1, number2, number3] = WinCombinations[i];
     //     if(fields[number1] !== "" && fields[number1] === fields[number2] && fields[number1] === fields[number3]){
@@ -30,49 +28,55 @@ let checkForWin = () =>{
     //         return true;
     //     }
     // }
+
     WinCombinations.forEach((combination)=>{ 
-
         const [number1, number2, number3] = combination;
-            // fields.every( (val, i, arr) => val !== "" && val === "X" || val === "O" ) MAYBE WORK?
-            //WinCombinations.every( (val, i, arr) => val === val[0])
-
-     if(fields[number1] !== "" && fields[number1] === fields[number2] && fields[number1] === fields[number3]){
-            won = true; 
-            alert(`Player ${activePlayer} won!`);
-        }
+        if(fields[number1] !== "" && fields[number1] === fields[number2] && fields[number1] === fields[number3]){
+                won = true; 
+                alert(`Player ${activePlayer} won!`);
+                gameActive = false;
+            }
     })
 
-
-    // if(moves === 9 && !won){
-    //         alert("Its draw!");
-    //         result.innerHTML="Its draw";
-    //         //CO DAJE RETURN (DEBBUGER)
-    //         return true;
-    //     }
+    if(moves === 9 && !won){
+            alert("Its draw!");
+            result.innerHTML="Its draw";
+            gameActive = false;
+        }
 };
 
-let changePlayer = () =>{
+const changePlayer = () =>{
     activePlayer = activePlayer === "X" ? "O" : "X";
     playerName.innerHTML=`Player ${activePlayer} move`;
+};
+
+const isGameActive = () =>{
+    if(!gameActive){
+        if (window.confirm("Do you want to play again?")) {
+            gameActive = true;
+            window.location.reload();
+          }else{
+            gameActive = false;
+          }
+    }
 }
 
-
-// Event listner on game board
-document.querySelector("#gameBoard").addEventListener("click", function(e) {
-	// Check if clicked button match class 'field'
-
-	if(e.target?.matches(".field")) {
-		
-		const {number} = e.target.dataset;
-        //Check if choosed field is empty
-        if(fields[number] === ""){
-            moves++
-            fields[number] = activePlayer;
-            e.target.innerHTML= activePlayer;
-            checkForWin();
-            changePlayer();
-        }else{
-            alert("You choosed wrong field");
+if(gameActive = true){
+    document.querySelector("#gameBoard").addEventListener("click", function(e) {
+        if(e.target?.matches(".field")) {
+            const {number} = e.target.dataset;
+            if(fields[number] === ""){
+                moves++
+                fields[number] = activePlayer;
+                e.target.innerHTML= activePlayer;
+                checkForWin();
+                isGameActive();
+                changePlayer();
+            }else{
+                alert("You choosed wrong field");
+            }
         }
-	}
-});
+    });
+}else{
+    alert("You choosed to dont play again");
+}
