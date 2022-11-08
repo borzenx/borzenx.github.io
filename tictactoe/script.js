@@ -1,7 +1,7 @@
 let playerName = document.querySelector("#playerName");
 let moves = 0;
 let won;
-let gameActive;
+let gameActive = true;
 const fields = ["","","","","","","","",""];
 let activePlayer = "X";
 const WinCombinations = [
@@ -47,27 +47,25 @@ const isGameActive = () =>{
             window.location.reload();
           }else{
             gameActive = false;
-            window.location.reload();
           }
     }
 }
-
-if(gameActive = true){
     document.querySelector("#gameBoard").addEventListener("click", function(e) {
-        if(e.target?.matches(".field")) {
-            const {number} = e.target.dataset;
-            if(fields[number] === ""){
-                moves++
-                fields[number] = activePlayer;
-                e.target.innerHTML= activePlayer;
-                checkForWin();
-                isGameActive();
-                changePlayer();
-            }else{
-                alert("You choosed wrong field");
+        if(gameActive){
+            if(e.target?.matches(".field")) {
+                const {number} = e.target.dataset;
+                if(fields[number] === ""){
+                    moves++
+                    fields[number] = activePlayer;
+                    e.target.innerHTML= activePlayer;
+                    checkForWin();
+                    isGameActive();
+                    changePlayer();
+                }else{
+                    alert("You choosed wrong field");
+                }
             }
+        }else{
+            isGameActive();
         }
-    });
-}else{
-    alert("error");
-}
+    })
