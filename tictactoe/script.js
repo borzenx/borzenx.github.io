@@ -1,7 +1,7 @@
 let playerName = document.querySelector("#playerName");
 let moves = 0;
 let won;
-let gameActive = true;
+let gameActive;
 const fields = ["","","","","","","","",""];
 let activePlayer = "X";
 const WinCombinations = [
@@ -20,15 +20,6 @@ const WinCombinations = [
 
 const checkForWin = () =>{
 
-    // OLD NOT OPTIMIZED CODE
-    // for(let i = 0; i <=7; i++){
-    //     const [number1, number2, number3] = WinCombinations[i];
-    //     if(fields[number1] !== "" && fields[number1] === fields[number2] && fields[number1] === fields[number3]){
-    //         alert(`Player ${activePlayer} won!`);
-    //         return true;
-    //     }
-    // }
-
     WinCombinations.forEach((combination)=>{ 
         const [number1, number2, number3] = combination;
         if(fields[number1] !== "" && fields[number1] === fields[number2] && fields[number1] === fields[number3]){
@@ -40,9 +31,8 @@ const checkForWin = () =>{
 
     if(moves === 9 && !won){
             alert("Its draw!");
-            result.innerHTML="Its draw";
             gameActive = false;
-        }
+    }
 };
 
 const changePlayer = () =>{
@@ -57,6 +47,7 @@ const isGameActive = () =>{
             window.location.reload();
           }else{
             gameActive = false;
+            window.location.reload();
           }
     }
 }
@@ -78,5 +69,5 @@ if(gameActive = true){
         }
     });
 }else{
-    alert("You choosed to dont play again");
+    alert("error");
 }
