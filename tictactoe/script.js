@@ -21,7 +21,7 @@ const WinCombinations = [
 ];
 
 //ZMIANA NA FUNCKJE STRZALKOWA
-function checkForWin(){
+const checkForWin=()=>{
 
     // for(let i = 0; i <=7; i++){
     //     const [number1, number2, number3] = WinCombinations[i];
