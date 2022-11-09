@@ -43,32 +43,23 @@ const changePlayer = () => {
     playerName.innerHTML=`Player ${activePlayer} move`;
 };
 
-const isGameActive = () => {
-    if(!gameActive){
-        if (window.confirm("Do you want to play again?")) {
-            gameActive = true;
-            window.location.reload();
-          }else{
-            gameActive = false;
-          }
-    }
-};
-    document.querySelector("#gameBoard").addEventListener("click", function(e) {
-        if(gameActive){
-            if(e.target?.matches(".field")) {
-                const {number} = e.target.dataset;
+document.querySelector("#gameBoard").addEventListener("click", function(e) {
+    if(!won) {
+        if(e.target?.matches(".field")) {
+            const {number} = e.target.dataset;
                 if(fields[number] === "") {
                     moves++
                     fields[number] = activePlayer;
                     e.target.innerHTML= activePlayer;
                     checkForWin();
-                    isGameActive();
                     changePlayer();
                 }else {
                     alert("You choosed wrong field");
                 }
             }
-        }else {
-            isGameActive();
+    }else{
+        if(confirm("Do you want to play again?")) {
+            window.location.reload();
         }
+    }
     });
