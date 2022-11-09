@@ -18,16 +18,19 @@ const WinCombinations = [
     [6, 4, 2]
 ];
 
-const checkForWin = () =>{
+const checkForWin = () => {
 
-    WinCombinations.forEach((combination)=>{ 
-        const [number1, number2, number3] = combination;
-        if(fields[number1] !== "" && fields[number1] === fields[number2] && fields[number1] === fields[number3]){
+    WinCombinations.forEach((combination) => { 
+        const [firstFieldNumber, ...restCombination] = combination || [];
+        const firstFieldValue = fields[firstFieldNumber];
+        const allFieldsAreTheSame = firstFieldValue && restCombination.every((fieldNumber) => fields[fieldNumber] === firstFieldValue);
+
+        if(!won && allFieldsAreTheSame) {
                 won = true; 
                 alert(`Player ${activePlayer} won!`);
                 gameActive = false;
             }
-    })
+    });
 
     if(moves === 9 && !won){
             alert("Its draw!");
@@ -35,12 +38,12 @@ const checkForWin = () =>{
     }
 };
 
-const changePlayer = () =>{
+const changePlayer = () => {
     activePlayer = activePlayer === "X" ? "O" : "X";
     playerName.innerHTML=`Player ${activePlayer} move`;
 };
 
-const isGameActive = () =>{
+const isGameActive = () => {
     if(!gameActive){
         if (window.confirm("Do you want to play again?")) {
             gameActive = true;
@@ -49,23 +52,23 @@ const isGameActive = () =>{
             gameActive = false;
           }
     }
-}
+};
     document.querySelector("#gameBoard").addEventListener("click", function(e) {
         if(gameActive){
             if(e.target?.matches(".field")) {
                 const {number} = e.target.dataset;
-                if(fields[number] === ""){
+                if(fields[number] === "") {
                     moves++
                     fields[number] = activePlayer;
                     e.target.innerHTML= activePlayer;
                     checkForWin();
                     isGameActive();
                     changePlayer();
-                }else{
+                }else {
                     alert("You choosed wrong field");
                 }
             }
-        }else{
+        }else {
             isGameActive();
         }
-    })
+    });
