@@ -21,7 +21,11 @@ const checkForWin = () => {
   WinCombinations.forEach((combination) => {
     const [firstFieldNumber, ...restCombination] = combination || [];
     const firstFieldValue = fields[firstFieldNumber];
-    const allFieldsAreTheSame = firstFieldValue && restCombination.every((fieldNumber) => fields[fieldNumber] === firstFieldValue);
+    const allFieldsAreTheSame =
+      firstFieldValue &&
+      restCombination.every(
+        (fieldNumber) => fields[fieldNumber] === firstFieldValue
+      );
 
     if (!won && allFieldsAreTheSame) {
       won = true;
@@ -30,6 +34,7 @@ const checkForWin = () => {
   });
 
   if (moves === 9 && !won) {
+    won = true;
     alert("Its draw!");
   }
 };
@@ -39,7 +44,7 @@ const changePlayer = () => {
   playerName.innerHTML = `Player ${activePlayer} move`;
 };
 
-document.querySelector("#gameBoard").addEventListener("click", e => {
+document.querySelector("#gameBoard").addEventListener("click", (e) => {
   if (!won) {
     if (e.target?.matches(".field")) {
       const { number } = e.target.dataset;
