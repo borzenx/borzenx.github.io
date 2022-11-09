@@ -42,7 +42,7 @@ const changePlayer = () => {
   playerName.innerHTML = `Player ${activePlayer} move`;
 };
 
-document.querySelector("#gameBoard").addEventListener("click", function (e) {
+document.querySelector("#gameBoard").addEventListener("click", e => {
   if (!won) {
     if (e.target?.matches(".field")) {
       const { number } = e.target.dataset;
