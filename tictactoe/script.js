@@ -45,22 +45,17 @@ const changePlayer = () => {
 };
 
 document.querySelector("#gameBoard").addEventListener("click", (e) => {
-  if (!won) {
-    if (e.target?.matches(".field")) {
-      const { number } = e.target.dataset;
-      if (fields[number] === "") {
-        moves++;
-        fields[number] = activePlayer;
-        e.target.innerHTML = activePlayer;
-        checkForWin();
-        changePlayer();
-      } else {
-        alert("You choosed wrong field");
-      }
-    }
-  } else {
-    if (confirm("Do you want to play again?")) {
-      window.location.reload();
+  if (won) return alert("New game is starting..."), window.location.reload();
+  if (e.target?.matches(".field")) {
+    const { number } = e.target.dataset;
+    if (!fields[number]) {
+      moves++;
+      fields[number] = activePlayer;
+      e.target.innerHTML = activePlayer;
+      checkForWin();
+      changePlayer();
+    } else {
+      alert("You choosed wrong field");
     }
   }
 });
