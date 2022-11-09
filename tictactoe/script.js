@@ -1,7 +1,6 @@
 let playerName = document.querySelector("#playerName");
 let moves = 0;
 let won;
-let gameActive = true;
 const fields = ["", "", "", "", "", "", "", "", ""];
 let activePlayer = "X";
 const WinCombinations = [
@@ -27,13 +26,11 @@ const checkForWin = () => {
     if (!won && allFieldsAreTheSame) {
       won = true;
       alert(`Player ${activePlayer} won!`);
-      gameActive = false;
     }
   });
 
   if (moves === 9 && !won) {
     alert("Its draw!");
-    gameActive = false;
   }
 };
 
