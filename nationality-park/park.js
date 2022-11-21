@@ -45,6 +45,6 @@ const displayData = () => {
   document.querySelector("#description-long").innerHTML =
     splittedText[0].replace(/ *\[[^)]*\] */g, "");
   document.querySelector("#description-history").innerHTML =
-    date + splittedText[1].replace(/ *\[[^)]*\] */g, "");
+    date + splittedText[1]?.replace(/ *\[[^)]*\] */g, "");
 };
 //${splittedText[1].replace(/ *\[[^)]*\] */g, "")}

@@ -57,15 +57,10 @@ const fetchNationalPark = async () => {
     const html = result;
     const $ = cheerio.load(html);
 
-    //title
     const title = $(".mw-page-title-main").text();
     parksData[i].title = title;
-
-    //symbol
     const symbol = `https:${$(".infobox img[alt*='Logotyp']").attr("src")}`;
     parksData[i].symbol = symbol;
-
-    //description
     const description = $(".mw-parser-output > p, h2").text();
     parksData[i].description = description;
   });
@@ -85,6 +80,6 @@ const fetchNationalPark = async () => {
 
 try {
   await fetchNationalParks().then(fetchNationalPark);
-} catch {
-  console.log(`ERROR`);
+} catch (e) {
+  console.log(`ERROR ${e}`);
 }

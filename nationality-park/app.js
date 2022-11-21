@@ -5,7 +5,7 @@ const displayData = () => {
   const rand = Math.floor(Math.random() * 23);
   document.querySelector(
     "#homeBox"
-  ).style.background = `url('img/${parksData[rand].name}.jpg')`;
+  ).style.backgroundImage = `url('img/${parksData[rand].name}.jpg')`;
   document.querySelector("#title").innerHTML = parksData[rand].title;
   document.querySelector("#description").innerHTML = `${parksData[
     rand
@@ -26,7 +26,6 @@ const displayData = () => {
     xValues.push(data.name);
     yValues.push(data.area.replace(" km2", "").replace(",", "."));
   });
-  console.log(yValues);
 
   new Chart("nationalParksChart", {
     type: "bar",
