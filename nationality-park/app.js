@@ -13,7 +13,7 @@ const displayData = () => {
   ].description.replace(/ *\[[^)]*\] */g, "")} Park Narodowy`;
   document
     .querySelector("#moreInfoBtn")
-    .setAttribute("href", `park.html?parkname=${parksData[rand].name}`);
+    .setAttribute("href", `park.html?parkName=${parksData[rand].name}`);
 
   const xValues = [];
   const yValues = [];

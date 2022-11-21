@@ -4,13 +4,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const name = urlParams.get("parkName");
 
 const displayData = () => {
-  const parkData = parksData.filter((element) => element.name == name);
-  const description = parkData[0].description;
-  const date = parkData[0].date;
-  const title = parkData[0].title;
-  const symbol = parkData[0].symbol;
-  const area = parkData[0].area;
-  const voivodeship = parkData[0].voivodeship;
+  const { description, date, title, symbol, area, voivodeship } =
+    parksData.find((element) => element.name == name);
   const splittedText = description.split("Historia");
 
   document.querySelector("#informations").innerHTML = `
