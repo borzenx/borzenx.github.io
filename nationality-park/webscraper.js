@@ -13,30 +13,26 @@ const fetchNationalParks = async () => {
   const $ = cheerio.load(html);
 
   $(`.wikitable tbody tr td a[title*='${title}']`).each((i, e) => {
-    //park link
-    const parkLink = `https://pl.wikipedia.org${$(e).attr("href")}`;
-    //name of park
-    const nameOfPark = $(e).text();
-    //area
-    const area = $(
-      `.wikitable tbody tr:nth-child(${i + 2}) td:nth-child(5)`
-    ).text();
-    //voivodeship
-    const voivodeship = $(
-      `.wikitable tbody tr:nth-child(${i + 2}) td:nth-child(9)`
-    ).text();
-    //date
-    const date = $(
-      `.wikitable tbody tr:nth-child(${i + 2}) td:nth-child(4)`
-    ).text();
-    const dateText = `${nameOfPark} Park Narodowy powstał w roku ${date}. `;
+    const href = `https://pl.wikipedia.org${$(e).attr("href")}`;
+    const name = $(e).text();
+
+    const getCell = (number) =>
+      $(
+        `.wikitable tbody tr:nth-child(${i + 2}) td:nth-child(${number})`
+      ).text();
+
+    const area = getCell(5);
+    const voivodeship = getCell(9);
+    const date = getCell(4);
+
+    const dateText = `${name} Park Narodowy powstał w roku ${date}. `;
 
     parksData.push({
-      name: nameOfPark,
+      name,
       date: dateText,
-      area: area,
-      voivodeship: voivodeship,
-      href: parkLink,
+      area,
+      voivodeship,
+      href,
       symbol: "",
       description: "",
       title: "",
@@ -46,8 +42,7 @@ const fetchNationalParks = async () => {
 
 const fetchNationalPark = async () => {
   const promises = parksData.map(({ href }) => {
-    const nationalParkLink = href;
-    return fetch(nationalParkLink);
+    return fetch(href);
   });
   const results = await Promise.all(promises).then((values) => {
     return Promise.all(values.map((element) => element.text()));
