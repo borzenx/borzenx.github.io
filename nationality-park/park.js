@@ -5,7 +5,7 @@ const name = urlParams.get("parkName");
 
 const displayData = () => {
   const { description, date, title, symbol, area, voivodeship } =
-    parksData.find((element) => element.name == name);
+    parksData.find((element) => element.name === name);
   const splittedText = description.split("Historia");
 
   document.querySelector("#informations").innerHTML = `
