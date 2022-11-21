@@ -41,9 +41,8 @@ const displayData = () => {
     "#homeBox"
   ).style.background = `url('img/${name}.jpg')`;
   document.querySelector("#title").innerHTML = title;
-  document.querySelector("#description-long").innerHTML =
+  document.querySelector("#descriptionLong").innerHTML =
     splittedText[0].replace(/ *\[[^)]*\] */g, "");
-  document.querySelector("#description-history").innerHTML =
+  document.querySelector("#descriptionHistory").innerHTML =
     date + splittedText[1]?.replace(/ *\[[^)]*\] */g, "");
 };
-//${splittedText[1].replace(/ *\[[^)]*\] */g, "")}
