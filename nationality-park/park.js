@@ -3,13 +3,6 @@ import parksData from "./nationalParksOfPolandData.json" assert { type: "json" }
 const urlParams = new URLSearchParams(window.location.search);
 const name = urlParams.get("parkName");
 
-if (name === null) {
-  window.location.href = "index.html";
-}
-window.addEventListener("DOMContentLoaded", () => {
-  displayData();
-});
-
 const displayData = () => {
   const parkData = parksData.filter((element) => element.name == name);
   const description = parkData[0].description;
@@ -20,7 +13,6 @@ const displayData = () => {
   const voivodeship = parkData[0].voivodeship;
   const splittedText = description.split("Historia");
 
-  console.log(parkData);
   document.querySelector("#informations").innerHTML = `
   <table>
       <tr>
@@ -46,3 +38,11 @@ const displayData = () => {
   document.querySelector("#descriptionHistory").innerHTML =
     date + splittedText[1]?.replace(/ *\[[^)]*\] */g, "");
 };
+
+if (name === null) {
+  window.location.href = "index.html";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  displayData();
+});
