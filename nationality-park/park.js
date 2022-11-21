@@ -1,7 +1,6 @@
 import parksData from "./nationalParksOfPolandData.json" assert { type: "json" };
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+const urlParams = new URLSearchParams(window.location.search);
 const name = urlParams.get("parkName");
 
 if (name == null) {
