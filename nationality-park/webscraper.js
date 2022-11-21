@@ -39,6 +39,7 @@ const fetchNationalParks = async () => {
       title: "",
     });
   });
+  return fetchNationalPark();
 };
 
 const fetchNationalPark = async () => {
@@ -69,7 +70,7 @@ const fetchNationalPark = async () => {
 };
 
 try {
-  await fetchNationalParks().then(fetchNationalPark);
+  fetchNationalParks();
 } catch (e) {
   console.error(`ERROR ${e}`);
 }
