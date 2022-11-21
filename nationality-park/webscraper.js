@@ -28,6 +28,7 @@ const fetchNationalParks = async () => {
     const dateText = `${name} Park Narodowy powstał w roku ${date}. `;
 
     parksData.push({
+      id: i,
       name,
       date: dateText,
       area,
