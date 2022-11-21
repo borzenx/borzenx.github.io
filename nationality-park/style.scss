@@ -50,17 +50,19 @@ table {
     background-color: $backgroundColor50;
     width: 100%;
     border-collapse: collapse;
-  }
+}
 
 td, th {
     width: 25%;
     border: 1px solid $backgroundColor;
     text-align: center;
-  }
+}
 
-table img {
-    width: 100px;
-  }
+table {
+    img {
+        width: 100px;
+    }
+}
 
 #homeBox {
     background-size: cover !important;
