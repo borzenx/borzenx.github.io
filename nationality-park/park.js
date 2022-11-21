@@ -3,7 +3,7 @@ import parksData from "./nationalParksOfPolandData.json" assert { type: "json" }
 const urlParams = new URLSearchParams(window.location.search);
 const name = urlParams.get("parkName");
 
-if (name == null) {
+if (name === null) {
   window.location.href = "index.html";
 }
 window.addEventListener("DOMContentLoaded", () => {
