@@ -75,8 +75,10 @@ table {
     z-index: 200;
 }
 
-.homeBoxText h1 {
-    font-size: 4rem;z-index: 200;
+.homeBoxText {
+    h1 {
+        font-size: 4rem;z-index: 200;
+    }
 }
 
 .btn {
@@ -86,11 +88,11 @@ table {
     transition: 0.25s;
     display: inline-block;
     text-decoration: none;
-}
 
-.btn:hover {
-    filter: brightness(0.8);
-    transition: 0.25s;
+    :hover {
+        filter: brightness(0.8);
+        transition: 0.25s;
+    }
 }
 
 #description {
@@ -139,16 +141,16 @@ table {
     transition: 0.25s;
     background-size: cover;
     aspect-ratio: 16/9;
-}
 
-.parkCard:hover {
-    transition: 0.25s;
-    transform: scale(1.05);
-}
+    :hover {
+        transition: 0.25s;
+        transform: scale(1.05);
+    }
 
-.parkCard > img {
-    width: 50%;
-    margin: auto;
+    img {
+        width: 50%;
+        margin: auto;
+    }
 }
 
 #nationalParksChart {
@@ -163,8 +165,10 @@ table {
         gap: 20px;
     }
 
-    .homeBoxText h1 {
-        font-size: 2rem;z-index: 200;
+    .homeBoxText {
+        h1 {
+            font-size: 2rem;z-index: 200;
+        }
     }
 
     #nationalParksChart {
