@@ -57,10 +57,9 @@ const fetchNationalPark = async () => {
     parksData[i].description = $(".mw-parser-output > p, h2").text();
   });
 
-  var jsonData = JSON.stringify(parksData);
   fs.writeFile(
     "nationality-park/nationalParksOfPolandData.json",
-    jsonData,
+    JSON.stringify(parksData),
     function (err) {
       if (err) {
         console.log(err);
