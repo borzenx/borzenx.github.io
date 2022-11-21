@@ -18,17 +18,17 @@ const displayData = () => {
   const xValues = [];
   const yValues = [];
 
-  parksData.forEach((data, i) => {
+  parksData.forEach(({ name, symbol, area }) => {
     dataHTML += `
-    <a href="park.html?parkName=${data.name}">
-      <div style="background-image: url('img/${data.name}.jpg')" id="${data.name}" class="parkCard">
-        <img src="${data.symbol}">
+    <a href="park.html?parkName=${name}">
+      <div style="background-image: url('img/${name}.jpg')" id="${name}" class="parkCard">
+        <img src="${symbol}">
       </div>
     </a>`;
 
     document.querySelector("#parksGrid").innerHTML = dataHTML;
-    xValues.push(data.name);
-    yValues.push(data.area.replace(" km2", "").replace(",", "."));
+    xValues.push(name);
+    yValues.push(area.replace(" km2", "").replace(",", "."));
   });
 
   new Chart("nationalParksChart", {
