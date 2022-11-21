@@ -42,26 +42,21 @@ const fetchNationalParks = async () => {
 };
 
 const fetchNationalPark = async () => {
-  const promises = parksData.map(({ href }) => {
-    return fetch(href);
-  });
+  const promises = parksData.map(({ href }) => fetch(href));
   const results = await Promise.all(promises).then((values) => {
     return Promise.all(values.map((element) => element.text()));
   });
 
   results.forEach((result, i) => {
-    const html = result;
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(result);
 
-    const title = $(".mw-page-title-main").text();
-    parksData[i].title = title;
-    const symbol = `https:${$(".infobox img[alt*='Logotyp']").attr("src")}`;
-    parksData[i].symbol = symbol;
-    const description = $(".mw-parser-output > p, h2").text();
-    parksData[i].description = description;
+    parksData[i].title = $(".mw-page-title-main").text();
+    parksData[i].symbol = `https:${$(".infobox img[alt*='Logotyp']").attr(
+      "src"
+    )}`;
+    parksData[i].description = $(".mw-parser-output > p, h2").text();
   });
 
-  console.log(parksData);
   var jsonData = JSON.stringify(parksData);
   fs.writeFile(
     "nationality-park/nationalParksOfPolandData.json",
