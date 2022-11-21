@@ -3,6 +3,7 @@ import parksData from "./nationalParksOfPolandData.json" assert { type: "json" }
 const displayData = () => {
   let dataHTML = ``;
   const rand = Math.floor(Math.random() * 23);
+
   document.querySelector(
     "#homeBox"
   ).style.backgroundImage = `url('img/${parksData[rand].name}.jpg')`;
@@ -13,8 +14,10 @@ const displayData = () => {
   document
     .querySelector("#moreInfoBtn")
     .setAttribute("href", `park.html?parkname=${parksData[rand].name}`);
+
   const xValues = [];
   const yValues = [];
+
   parksData.forEach((data, i) => {
     dataHTML += `
     <a href="park.html?parkname=${data.name}">
@@ -22,6 +25,7 @@ const displayData = () => {
         <img src="${data.symbol}">
       </div>
     </a>`;
+
     document.querySelector("#parksGrid").innerHTML = dataHTML;
     xValues.push(data.name);
     yValues.push(data.area.replace(" km2", "").replace(",", "."));
