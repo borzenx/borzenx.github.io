@@ -20,7 +20,7 @@ const displayData = () => {
 
   parksData.forEach((data, i) => {
     dataHTML += `
-    <a href="park.html?parkname=${data.name}">
+    <a href="park.html?parkName=${data.name}">
       <div style="background-image: url('img/${data.name}.jpg')" id="${data.name}" class="parkCard">
         <img src="${data.symbol}">
       </div>
