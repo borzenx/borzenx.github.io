@@ -65,7 +65,7 @@ table {
 }
 
 #homeBox {
-    background-size: cover !important;
+    background-size: cover;
     width: 100%;
     height: 100vh;
 }
@@ -123,7 +123,6 @@ table {
 
 /*PARKS CARD*/
 #parksContainer {
-    margin-top: -250px;
     z-index: 200;
     position: relative;
 }
@@ -160,14 +159,12 @@ table {
 /*ON PHONE*/
 @media only screen and (max-width: 800px) {
     #parksGrid {
-        display: grid; 
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
     }
 
     .homeBoxText {
         h1 {
-            font-size: 2rem;z-index: 200;
+            font-size: 2rem;
         }
     }
 
@@ -180,13 +177,6 @@ table {
     }
 
     #description {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        text-align: justify;
-        -webkit-box-orient: vertical;
-        margin-top: 25px;
-        margin-bottom: 25px;
-        max-width: 100%;
+        max-width: 60%;
     }
   }
