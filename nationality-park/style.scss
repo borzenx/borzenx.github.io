@@ -44,7 +44,7 @@ table{
     width: 100%;
     border-collapse: collapse;
   }
-td{
+td, th{
     width: 25%;
     border: 1px solid $backgroundColor;
     text-align: center;

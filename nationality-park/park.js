@@ -11,10 +11,10 @@ const displayData = () => {
   document.querySelector("#informations").innerHTML = `
   <table>
       <tr>
-          <td>Symbol</td>
-          <td>Nazwa</td>
-          <td>Województwo</td>
-          <td>Powierzchnia</td>
+          <th>Symbol</th>
+          <th>Nazwa</th>
+          <th>Województwo</th>
+          <th>Powierzchnia</th>
       </tr>
       <tr>
           <td><img src="${symbol}"></td>
