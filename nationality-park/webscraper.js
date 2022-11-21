@@ -62,7 +62,7 @@ const fetchNationalPark = async () => {
     JSON.stringify(parksData),
     function (err) {
       if (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   );
@@ -71,5 +71,5 @@ const fetchNationalPark = async () => {
 try {
   await fetchNationalParks().then(fetchNationalPark);
 } catch (e) {
-  console.log(`ERROR ${e}`);
+  console.error(`ERROR ${e}`);
 }
