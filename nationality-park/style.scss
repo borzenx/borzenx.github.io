@@ -89,7 +89,7 @@ table {
     display: inline-block;
     text-decoration: none;
 
-    :hover {
+    &:hover {
         filter: brightness(0.8);
         transition: 0.25s;
     }
@@ -141,7 +141,7 @@ table {
     background-size: cover;
     aspect-ratio: 16/9;
 
-    :hover {
+    &:hover {
         transition: 0.25s;
         transform: scale(1.05);
     }

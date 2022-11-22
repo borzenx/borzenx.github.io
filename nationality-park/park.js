@@ -4,11 +4,17 @@ const urlParams = new URLSearchParams(window.location.search);
 const name = urlParams.get("parkName");
 
 const displayData = () => {
-  const { description, date, title, symbol, area, voivodeship } =
-    parksData.find((element) => element.name === name);
-  const splittedText = description.split("Historia");
+  const {
+    description: fullDescription,
+    date,
+    title,
+    symbol,
+    area,
+    voivodeship,
+  } = parksData.find((element) => element.name === name);
+  const [description, history] = fullDescription.split("Historia");
 
-  document.querySelector("#informations").innerHTML = `
+  document.querySelector("#information").innerHTML = `
   <table>
       <tr>
           <th>Symbol</th>
@@ -28,10 +34,12 @@ const displayData = () => {
     "#homeBox"
   ).style.background = `url('img/${name}.jpg')`;
   document.querySelector("#title").innerHTML = title;
-  document.querySelector("#descriptionLong").innerHTML =
-    splittedText[0].replace(/ *\[[^)]*\] */g, "");
+  document.querySelector("#descriptionLong").innerHTML = description.replace(
+    / *\[[^)]*\] */g,
+    ""
+  );
   document.querySelector("#descriptionHistory").innerHTML =
-    date + splittedText[1]?.replace(/ *\[[^)]*\] */g, "");
+    date + (history?.replace(/ *\[[^)]*\] */g, "") || "");
 };
 
 if (name === null) {

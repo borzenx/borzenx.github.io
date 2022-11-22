@@ -1,22 +1,29 @@
 import parksData from "./nationalParksOfPolandData.json" assert { type: "json" };
 
-const displayData = () => {
-  let dataHTML = ``;
-  const rand = Math.floor(Math.random() * 23);
-
+const setLandingPageLayout = ({ name, title, description }) => {
   document.querySelector(
     "#homeBox"
-  ).style.backgroundImage = `url('img/${parksData[rand].name}.jpg')`;
-  document.querySelector("#title").innerHTML = parksData[rand].title;
-  document.querySelector("#description").innerHTML = `${parksData[
-    rand
-  ].description.replace(/ *\[[^)]*\] */g, "")} Park Narodowy`;
+  ).style.backgroundImage = `url('img/${name}.jpg')`;
+  document.querySelector("#title").innerHTML = title;
+  document.querySelector("#description").innerHTML = `${description.replace(
+    / *\[[^)]*\] */g,
+    ""
+  )} Park Narodowy`;
   document
     .querySelector("#moreInfoBtn")
-    .setAttribute("href", `park.html?parkName=${parksData[rand].name}`);
+    .setAttribute("href", `park.html?parkName=${name}`);
+};
+const addParks = (html) => {
+  document.querySelector("#parksGrid").innerHTML = html;
+};
 
+const displayData = () => {
   const xValues = [];
   const yValues = [];
+  const randomNumber = Math.floor(Math.random() * 23);
+  let dataHTML = ``;
+
+  setLandingPageLayout(parksData[randomNumber]);
 
   parksData.forEach(({ name, symbol, area }) => {
     dataHTML += `
@@ -26,10 +33,11 @@ const displayData = () => {
       </div>
     </a>`;
 
-    document.querySelector("#parksGrid").innerHTML = dataHTML;
     xValues.push(name);
     yValues.push(area.replace(" km2", "").replace(",", "."));
   });
+
+  addParks(dataHTML);
 
   new Chart("nationalParksChart", {
     type: "bar",
