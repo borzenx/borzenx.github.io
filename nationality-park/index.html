@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="homeBox"class="container">
+            <div class="contentWrapper">
+                <div class="homeBoxText">
+                    <p class="accentText">Polskie Parki Narodowe</p>
+                    <h1 id="title"></h1>
+                    <p id="description"></p>
+                    <a class="btn" id="moreInfoBtn">Dowiedź się więcej</a>
+                </div>
+                <h2>Ranking parków</h2>
+                <canvas id="nationalParksChart"></canvas>
+                <h2>Lista Parków Narodowych</h2>
+                <div id="parksGrid"></div>
+            </div>
+            <div id="gradient"></div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script type="module" src="app.js"></script>
+    </body>
+</html>
