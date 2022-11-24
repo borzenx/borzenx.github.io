@@ -43,11 +43,11 @@ const fetchNationalParks = async () => {
 
 const fetchNationalPark = async () => {
   const promises = parksData.map(({ href }) => fetch(href));
-  const results = await Promise.all(promises).then((values) => {
-    return Promise.all(values.map((element) => element.text()));
-  });
+  const results = await Promise.all(promises);
+  const promises2 = results.map((element) => element.text());
+  const nationalParksHTML = await Promise.all(promises2);
 
-  results.forEach((result, i) => {
+  nationalParksHTML.forEach((result, i) => {
     const $ = cheerio.load(result);
 
     parksData[i].title = $(".mw-page-title-main").text();
@@ -66,6 +66,7 @@ const fetchNationalPark = async () => {
       }
     }
   );
+  console.log(parksData);
 };
 
 try {
