@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>REST Operations</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="editNotification"></div>
-        <table>
-        </table>
+        <div id="titleContainer">
+            <h1>List of users</h1>
+        </div>
+        <div id="tableContainer">
+            <table>
+            </table>
+        </div>
         <div id="inputContainer">
-            <input type="text" id="nameInput">
-            <input type="text" id="lastNameInput">
+            <input type="text" placeholder="Name" id="nameInput">
+            <input type="text" placeholder="Last name" id="lastNameInput">
             <button id="addUser">Add user</button>
         </div>
-
         <script src="app.js"></script>
     </body>
 </html>

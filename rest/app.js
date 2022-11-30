@@ -4,6 +4,20 @@ const insertUsersInTable = (html) => {
 const refresh = () => {
   window.location.reload();
 };
+const displayEditBox = () => {
+  document.querySelector("#editNotification").innerHTML = `
+    <div id="editContainer">
+        <div id="editBox">
+        <input type="text" placeholder="Name" id="newName">
+        <input type="text" placeholder="last name" id="newLastName">
+        <button id="update">Update</button>
+    </div>
+</div>`;
+};
+
+const hideEditBox = () => {
+  document.querySelector("#editNotification").innerHTML = "";
+};
 
 const fetchUsers = async () => {
   const response = await fetch("http://localhost:3000/users");
@@ -27,6 +41,7 @@ const fetchUsers = async () => {
   });
   insertUsersInTable(dataHTML);
 };
+
 document.querySelector("body").addEventListener("click", (e) => {
   if (e.target?.matches("#addUser")) {
     const name = document.querySelector("#nameInput").value;
@@ -62,14 +77,9 @@ document.querySelector("body").addEventListener("click", (e) => {
 
   if (e.target?.matches(".editBtn")) {
     const id = e.target.value;
-    document.querySelector("#editNotification").innerHTML = `
-    <div id="editContainer">
-        <div id="editBox">
-        <input type="text" placeholder="Name" id="newName">
-        <input type="text" placeholder="last name" id="newLastName">
-        <button id="update">Update</button>
-    </div>
-</div>`;
+
+    displayEditBox();
+
     document.querySelector("#update").addEventListener("click", (e) => {
       const name = document.querySelector("#newName").value;
       const lastName = document.querySelector("#newLastName").value;
@@ -85,7 +95,7 @@ document.querySelector("body").addEventListener("click", (e) => {
       }).then((res) => {
         return res.json();
       });
-      document.querySelector("#editNotification").innerHTML = "";
+      hideEditBox();
       refresh();
     });
   }
