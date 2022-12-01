@@ -31,8 +31,8 @@ app.post("/add", function (req, res) {
 
 app.put("/update", function (req, res) {
   const { id, name, lastName } = req.body;
-  res.send((users[id].name = name));
-  res.send((users[id].lastName = lastName));
+  users[id].name = name;
+  users[id].lastName = lastName;
 });
 
 app.delete("/delete", function (req, res) {
