@@ -1,7 +1,11 @@
+//DOM MANIPULATION FUNCTIONS
+
 const insertUsersInTable = (html) => {
   document.querySelector("table").innerHTML = html;
 };
+
 const refresh = () => {};
+
 const displayEditBox = () => {
   document.querySelector("#editNotification").innerHTML = `
     <div id="editContainer">
@@ -17,17 +21,32 @@ const hideEditBox = () => {
   document.querySelector("#editNotification").innerHTML = "";
 };
 
-const fetchUsers = async () => {
+getNewUserData = () => {
+  const name = document.querySelector("#nameInput").value;
+  const lastName = document.querySelector("#lastNameInput").value;
+  return { name, lastName };
+};
+getDataHtmlHeader = () => {
+  return ` <tr>
+<th>UID</th>
+<th>Name</th>
+<th>Last Name</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>`;
+};
+
+getNewUsersToUpdate = () => {
+  const name = document.querySelector("#newName").value;
+  const lastName = document.querySelector("#newLastName").value;
+  return { name, lastName };
+};
+
+const fetchAndManipulateUsers = async () => {
   const response = await fetch("http://localhost:3000/users");
   const data = await response.json();
 
-  let dataHTML = ` <tr>
-    <th>UID</th>
-    <th>Name</th>
-    <th>Last Name</th>
-    <th>Edit</th>
-    <th>Delete</th>
-</tr>`;
+  let dataHTML = getDataHtmlHeader();
 
   data.forEach(({ name, lastName }, i) => {
     dataHTML += `<tr>
@@ -43,8 +62,20 @@ const fetchUsers = async () => {
 
 document.querySelector("body").addEventListener("click", (e) => {
   if (e.target?.matches("#addUser")) {
-    const name = document.querySelector("#nameInput").value;
-    const lastName = document.querySelector("#lastNameInput").value;
+    addNewUserOperation();
+  }
+
+  if (e.target?.matches(".deleteBtn")) {
+    deleteUserOperation();
+  }
+
+  if (e.target?.matches(".editBtn")) {
+    editUserOperation();
+  }
+
+  addNewUserOperation = () => {
+    const { name, lastName } = getNewUserData();
+
     const addUser = async () => {
       const response = await fetch("http://localhost:3000/add", {
         method: "POST",
@@ -58,10 +89,37 @@ document.querySelector("body").addEventListener("click", (e) => {
     };
     addUser();
     refresh();
+  };
+
+  function editUserOperation() {
+    const id = e.target.value;
+
+    displayEditBox();
+
+    document.querySelector("#update").addEventListener("click", () => {
+      const { name, lastName } = getNewUsersToUpdate();
+
+      const updateUser = async () => {
+        const response = await fetch("http://localhost:3000/update", {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            id,
+            name,
+            lastName,
+          }),
+        }).then((res) => res.json());
+        await response;
+      };
+      updateUser();
+      hideEditBox();
+      refresh();
+    });
   }
 
-  if (e.target?.matches(".deleteBtn")) {
+  function deleteUserOperation() {
     const id = e.target.value;
+
     const deleteUser = async () => {
       const response = await fetch("http://localhost:3000/delete", {
         method: "DELETE",
@@ -75,37 +133,10 @@ document.querySelector("body").addEventListener("click", (e) => {
     deleteUser();
     refresh();
   }
-
-  if (e.target?.matches(".editBtn")) {
-    const id = e.target.value;
-
-    displayEditBox();
-
-    document.querySelector("#update").addEventListener("click", (e) => {
-      const name = document.querySelector("#newName").value;
-      const lastName = document.querySelector("#newLastName").value;
-
-      const deleteUser = async () => {
-        const response = await fetch("http://localhost:3000/update", {
-          method: "PUT",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            id,
-            name,
-            lastName,
-          }),
-        }).then((res) => res.json());
-        await response;
-      };
-      deleteUser();
-      hideEditBox();
-      refresh();
-    });
-  }
 });
 
 try {
-  fetchUsers();
+  fetchAndManipulateUsers();
 } catch (e) {
   console.error(`Error ${e}`);
 }
