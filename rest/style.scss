@@ -1,14 +1,20 @@
-*{
+//COLORS
+$primary: rgb(67, 155, 237);
+$primary100: white;
+$secondary:lightgrey;
+$secondary50:#d3d3d350;
+
+* {
     margin: 0;
     padding: 0;
     font-family: Verdana;
 }
-#titleContainer{
+#titleContainer {
   height: 10vh;
   line-height: 10vh;
   text-align: center;
 }
-#tableContainer{
+#tableContainer {
   height: 80vh;
   overflow: scroll;
 
@@ -19,27 +25,27 @@
     border-radius: 2vh;
     text-align: center;
 
-    tr{
-      border-bottom: 1px solid lightgray;
+    tr {
+      border-bottom: 1px solid $secondary;
 
       td, th {
         padding: 30px;
         text-align: center;
         margin-bottom: 20px;
         
-        .deleteBtn{
-          background-color: crimson;
+        .deleteBtn {
+          background-color: $primary;
           border-radius: 2vh;
           padding: 10px 15px;
-          color: white;
+          color: $primary100;
           border: none;
           transition: 0.25s;
         }
-        .editBtn{
-          background-color: rgb(205, 182, 64);
+        .editBtn {
+          background-color: $primary;
           border-radius: 2vh;
           padding: 10px 15px;
-          color: white;
+          color: $primary100;
           border: none;
           transition: 0.25s;
         }
@@ -47,52 +53,52 @@
     }
   }
 }    
-  
-  #inputContainer{
-    margin: auto;
-    width: calc(80% - 40px);
-    height: 10vh;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    input{
-        background-color: white;
-        border: 1px solid lightgrey;
-        border-radius: 2vh;
-        padding: 10px;
-      }
+#inputContainer {
+  margin: auto;
+  width: calc(80% - 40px);
+  height: 10vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      button{
-        background-color: rgb(64, 115, 192);
-        border-radius: 2vh;
-        padding: 10px;
-        color: white;
-        border: none;
-        transition: 0.25s;
-
-        &:hover{
-            filter: brightness(0.8);
-            transition: 0.25s;
-          }
-      }
+  input {
+    background-color: $primary100;
+    border: 1px solid $secondary;
+    border-radius: 2vh;
+    padding: 10px;
   }
 
-  #editContainer{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    position: absolute;
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  button {
+    background-color: $primary;
+    border-radius: 2vh;
+    padding: 10px;
+    color: $primary100;
+    border: none;
+    transition: 0.25s;
 
-    #editBox{
-        background-color: white;
-        padding: 20px;
-        border-radius: 2vh;
-        border: 1px solid lightgrey;
-      }
+    &:hover {
+      filter: brightness(0.8);
+      transition: 0.25s;
+    }
   }
+}
+
+#editContainer {
+  width: 100%;
+  height: 100%;
+  background-color: $secondary50;
+  position: absolute;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #editBox {
+    background-color: $primary100;
+    padding: 20px;
+    border-radius: 2vh;
+    border: 1px solid $secondary;
+  }
+}
