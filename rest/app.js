@@ -29,7 +29,6 @@ const insertUsersInTable = (users) => {
             <td><button value="${id}" class="deleteBtn">Delete</button></td>
          </tr>`;
       });
-      document.querySelector("table").innerHTML = "";
       document.querySelector("table").innerHTML = searchedData;
     } else {
       document.querySelector("table").innerHTML = dataHTML;
