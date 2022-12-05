@@ -9,15 +9,20 @@
         <div id="titleContainer">
             <h1>List of users</h1>
         </div>
+        <!--ZMIANA NA KLASE-->
         <div id="tableContainer">
+            <div class="searchBox">
+                <input type="text" placeholder="Search for results" id="searchInput">
+            </div>
             <table>
             </table>
         </div>
+        <!--ZMIANA ID NA NAME, DODANIE KLAS -->
         <div id="inputContainer">
             <input type="text" placeholder="Name" id="nameInput">
             <input type="text" placeholder="Last name" id="lastNameInput">
-            <button id="addUser">Add user</button>
+            <button type="button" id="addUser"data-set="add">Add user</button>
         </div>
-        <script src="app.js"></script>
+        <script type="module" src="app.js"></script>
     </body>
 </html>

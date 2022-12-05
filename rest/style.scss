@@ -102,3 +102,11 @@ $secondary50:#d3d3d350;
     border: 1px solid $secondary;
   }
 }
+.searchBox {
+  margin: auto;
+  width: 80%;
+
+  input {
+    width: 100%;
+  }
+}

@@ -1,13 +1,8 @@
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
 const bodyParser = require("body-parser");
 const app = express();
-const users = [
-  { name: "Adam", lastName: "Mostowiak" },
-  { name: "Henryk", lastName: "Motyka" },
-  { name: "Blazej", lastName: "Slonecznik" },
-  { name: "Andrzej", lastName: "Kowalski" },
-  { name: "Mariusz", lastName: "Pudziankowski" },
-];
+const users = [];
 
 // parse application/json
 app.use(bodyParser.json());
@@ -23,21 +18,29 @@ app.get("/users", function (req, res) {
 
 app.post("/add", function (req, res) {
   const { name, lastName } = req.body;
+  const id = uuidv4();
   users.push({
-    name: name,
-    lastName: lastName,
+    id,
+    name,
+    lastName,
   });
+  res.send({ message: `Added user ${(id, name, lastName)}` });
 });
 
 app.put("/update", function (req, res) {
   const { id, name, lastName } = req.body;
-  users[id].name = name;
-  users[id].lastName = lastName;
+  const i = users.findIndex((obj) => obj.id == id);
+  users[i] = { id, name, lastName };
+  res.send("Success");
 });
 
+//status i odpowiedz
 app.delete("/delete", function (req, res) {
   const id = req.body.id;
-  users.splice(id, 1);
+
+  const i = users.findIndex((obj) => obj.id == id);
+  users.splice(i, 1);
+  res.send({ message: `deleted id ${id} on index ${i}` });
 });
 
 app.listen(3000);
