@@ -3,36 +3,14 @@ const insertUsersInTable = (users) => {
   let searchedData = getDataHtmlHeader();
 
   document.querySelector("#searchInput").addEventListener("input", (e) => {
-    let searchValue = e.target.value;
+    const searchValue = e.target.value;
 
-    if (searchValue.length >= 3) {
-      const result = users.filter(
-        (user) =>
-          user.name == searchValue ||
-          user.id == searchValue ||
-          user.lastName == searchValue
-      );
-
-      result.forEach(({ id, name, lastName }) => {
-        searchedData = `<tr>
-            <th>UID</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-            </tr>
-            <tr>
-            <td>${id}</td>
-            <td>${name}</td>
-            <td>${lastName}</td>
-            <td><button value="${id}" class="editBtn">Edit</button></td>
-            <td><button value="${id}" class="deleteBtn">Delete</button></td>
-         </tr>`;
-      });
-      document.querySelector("table").innerHTML = searchedData;
-    } else {
-      document.querySelector("table").innerHTML = dataHTML;
-    }
+    searchedData = displayDataAndCheckLength(
+      searchValue,
+      users,
+      searchedData,
+      dataHTML
+    );
   });
 
   users.forEach(({ id, name, lastName }) => {
@@ -40,8 +18,8 @@ const insertUsersInTable = (users) => {
         <td>${id}</td>
         <td>${name}</td>
         <td>${lastName}</td>
-        <td><button value="${id}" class="editBtn" data-set="edit">Edit</button></td>
-        <td><button value="${id}" class="deleteBtn" data-set="delete">Delete</button></td>
+        <td><button value="${id}" class="editBtn">Edit</button></td>
+        <td><button value="${id}" class="deleteBtn">Delete</button></td>
      </tr>`;
   });
   document.querySelector("table").innerHTML = dataHTML;
@@ -50,17 +28,6 @@ const insertUsersInTable = (users) => {
 const refresh = async () => {
   const users = await fetchUsers();
   insertUsersInTable(users);
-};
-
-const displayEditBox = () => {
-  document.querySelector("#editNotification").innerHTML = `
-    <div id="editContainer">
-        <div id="editBox">
-        <input type="text" placeholder="Name" id="newName" value="${users}">
-        <input type="text" placeholder="last name" id="newLastName">
-        <button id="update">Update</button>
-    </div>
-</div>`;
 };
 
 const hideEditBox = () => {
@@ -126,7 +93,7 @@ const addNewUserOperation = async (e) => {
 const editUserOperation = (e) => {
   const id = e.target.value;
 
-  displayEditBox(id);
+  displayEditBox();
 
   document.querySelector("#update").addEventListener("click", async () => {
     const { name, lastName } = getNewUsersToUpdate();
@@ -168,3 +135,47 @@ try {
 } catch (e) {
   console.error(`Error ${e}`);
 }
+const displayEditBox = () => {
+  document.querySelector("#editNotification").innerHTML = `
+    <div id="editContainer">
+        <div id="editBox">
+        <input type="text" placeholder="Name" id="newName">
+        <input type="text" placeholder="last name" id="newLastName">
+        <button id="update">Update</button>
+    </div>
+</div>`;
+};
+
+const displayDataAndCheckLength = (
+  searchValue,
+  users,
+  searchedData,
+  dataHTML
+) => {
+  if (searchValue.length >= 3) {
+    const result = users.filter(({ name, id, lastName }) =>
+      [name, id, lastName].includes(searchValue)
+    );
+
+    result.forEach(({ id, name, lastName }) => {
+      searchedData = `<tr>
+            <th>UID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            </tr>
+            <tr>
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${lastName}</td>
+            <td><button value="${id}" class="editBtn">Edit</button></td>
+            <td><button value="${id}" class="deleteBtn">Delete</button></td>
+         </tr>`;
+    });
+    document.querySelector("table").innerHTML = searchedData;
+  } else {
+    document.querySelector("table").innerHTML = dataHTML;
+  }
+  return searchedData;
+};

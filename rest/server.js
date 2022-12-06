@@ -29,7 +29,7 @@ app.post("/add", function (req, res) {
 
 app.put("/update", function (req, res) {
   const { id, name, lastName } = req.body;
-  const i = users.findIndex((obj) => obj.id == id);
+  const i = users.findIndex((obj) => obj.id === id);
   users[i] = { id, name, lastName };
   res.send("Success");
 });
