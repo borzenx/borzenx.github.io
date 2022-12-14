@@ -13,13 +13,13 @@ const insertUsersInTable = (users) => {
     );
   });
 
-  users.forEach(({ id, name, lastName }) => {
+  users.forEach(({ _id, name, lastName }) => {
     dataHTML += `<tr>
-        <td>${id}</td>
+        <td>${_id}</td>
         <td>${name}</td>
         <td>${lastName}</td>
-        <td><button value="${id}" class="editBtn">Edit</button></td>
-        <td><button value="${id}" class="deleteBtn">Delete</button></td>
+        <td><button value="${_id}" class="editBtn">Edit</button></td>
+        <td><button value="${_id}" class="deleteBtn">Delete</button></td>
      </tr>`;
   });
   document.querySelector("table").innerHTML = dataHTML;
@@ -91,7 +91,7 @@ const addNewUserOperation = async (e) => {
 };
 
 const editUserOperation = (e) => {
-  const id = e.target.value;
+  const _id = e.target.value;
 
   displayEditBox();
 
@@ -103,7 +103,7 @@ const editUserOperation = (e) => {
         method: "PUT",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-          id,
+          _id,
           name,
           lastName,
         }),
@@ -116,12 +116,12 @@ const editUserOperation = (e) => {
 };
 
 const deleteUserOperation = async (e) => {
-  const id = e.target.value;
+  const _id = e.target.value;
   await fetch("http://localhost:3000/delete", {
     method: "DELETE",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
-      id,
+      _id,
     }),
   })
     .then((res) => res.json())
@@ -153,11 +153,11 @@ const displayDataAndCheckLength = (
   dataHTML
 ) => {
   if (searchValue.length >= 3) {
-    const result = users.filter(({ name, id, lastName }) =>
-      [name, id, lastName].includes(searchValue)
+    const result = users.filter(({ name, _id, lastName }) =>
+      [name, _id, lastName].includes(searchValue)
     );
 
-    result.forEach(({ id, name, lastName }) => {
+    result.forEach(({ _id, name, lastName }) => {
       searchedData = `<tr>
             <th>UID</th>
             <th>Name</th>
@@ -166,11 +166,11 @@ const displayDataAndCheckLength = (
             <th>Delete</th>
             </tr>
             <tr>
-            <td>${id}</td>
+            <td>${_id}</td>
             <td>${name}</td>
             <td>${lastName}</td>
-            <td><button value="${id}" class="editBtn">Edit</button></td>
-            <td><button value="${id}" class="deleteBtn">Delete</button></td>
+            <td><button value="${_id}" class="editBtn">Edit</button></td>
+            <td><button value="${_id}" class="deleteBtn">Delete</button></td>
          </tr>`;
     });
     document.querySelector("table").innerHTML = searchedData;
