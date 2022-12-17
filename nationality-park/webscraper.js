@@ -1,7 +1,6 @@
 import cheerio from "cheerio";
 import fetch from "node-fetch";
 import fs from "fs";
-import { testElement } from "domutils";
 
 const parksData = [];
 
@@ -63,10 +62,8 @@ const fetchNationalPark = async () => {
     parksData[i].description = $(".mw-parser-output > p, h2").text();
   });
 
-  console.log(parksData);
-
   fs.writeFile(
-    "nationality-park/nationalParksOfPolandData.json",
+    "nationalParksOfPolandData.json",
     JSON.stringify(parksData),
     function (err) {
       if (err) {
