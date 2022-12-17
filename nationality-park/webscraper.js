@@ -42,11 +42,6 @@ const fetchNationalParks = async () => {
 };
 
 const fetchNationalPark = async () => {
-  // const promises = parksData.map(({ href }) => fetch(href));
-  // const results = await Promise.all(promises).then((values) =>
-  //   Promise.all(values.map((element) => element.text()))
-  // );
-
   const promises = parksData.map(({ href }) => fetch(href));
   const results = await Promise.all(promises).then((values) =>
     Promise.all(values.map((element) => element.text()))
