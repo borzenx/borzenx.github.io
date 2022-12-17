@@ -32,7 +32,7 @@ const displayData = () => {
   `;
   document.querySelector(
     "#homeBox"
-  ).style.background = `url('img/${name}.jpg')`;
+  ).style.backgroundImage = `url('img/${name}.jpg')`;
   document.querySelector("#title").innerHTML = title;
   document.querySelector("#descriptionLong").innerHTML = description.replace(
     / *\[[^)]*\] */g,

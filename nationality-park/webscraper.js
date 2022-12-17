@@ -1,7 +1,6 @@
 import cheerio from "cheerio";
 import fetch from "node-fetch";
 import fs from "fs";
-import { testElement } from "domutils";
 
 const parksData = [];
 
@@ -43,11 +42,6 @@ const fetchNationalParks = async () => {
 };
 
 const fetchNationalPark = async () => {
-  // const promises = parksData.map(({ href }) => fetch(href));
-  // const results = await Promise.all(promises).then((values) =>
-  //   Promise.all(values.map((element) => element.text()))
-  // );
-
   const promises = parksData.map(({ href }) => fetch(href));
   const results = await Promise.all(promises).then((values) =>
     Promise.all(values.map((element) => element.text()))
@@ -66,7 +60,7 @@ const fetchNationalPark = async () => {
   console.log(parksData);
 
   fs.writeFile(
-    "nationality-park/nationalParksOfPolandData.json",
+    "nationalParksOfPolandData.json",
     JSON.stringify(parksData),
     function (err) {
       if (err) {
